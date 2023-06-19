@@ -1,5 +1,6 @@
 #Battle Brothers Damage Calculator -- 1Hander Battery Version 1.6.3:
 #Welcome. Modify the below values as necessary until you reach the line ----- break.
+import os
 
 #This version of the calculator will run all top line 1Hander options in the provided scenario.
 #Unique weapon logic is automatically applied when appropriate. Weapon Mastery is assumed.
@@ -165,6 +166,9 @@ import statistics
 import collections
 import math
 import sys
+
+if os.environ.get('TEST') is not None:
+    random.seed('battlebrothers')
 
 #Note: This version of the calculator does not allow for unique attacker input. 
 #If you wish to test a famed option then use the regular BBCalc.py script for your famed option.

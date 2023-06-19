@@ -1,5 +1,6 @@
 #Battle Brothers Damage Calculator -- Enemies Vs. Defender Version 1.6.3:
 #Welcome. Modify the below values as necessary until you reach the line ----- break.
+import os
 
 #This version of the calculator will run 35 different enemies against a given defender.
 #Attacker specific perks, weapons, and traits are automatically applied.
@@ -108,6 +109,9 @@ import statistics
 import collections
 import math
 import sys
+
+if os.environ.get('TEST') is not None:
+    random.seed('battlebrothers')
 
 #Attacker Stats: Note: This version of the calculator does not allow for attacker inputs.
 Mind = 95

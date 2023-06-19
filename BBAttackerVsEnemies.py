@@ -1,5 +1,6 @@
 #Battle Brothers Damage Calculator -- Attacker Vs. Enemies Version 1.6.3:
 #Welcome. Modify the below values as necessary until you reach the line ----- break.
+import os
 
 #This version of the calculator will run a given attacker against 30 different enemies.
 #Defender specific stats and perks are automatically applied.
@@ -105,6 +106,9 @@ import statistics
 import collections
 import math
 import sys
+
+if os.environ.get('TEST') is not None:
+    random.seed('battlebrothers')
 
 #Defender Stats: #Note: This version of calculator does not allow for defender inputs.
 Def_HP = 100

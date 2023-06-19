@@ -1,5 +1,6 @@
 #Battle Brothers Damage Calculator -- Hit Chance Version 1.6.3:
 #Welcome. Modify the below values as necessary until you reach the line ----- break.
+import os
 
 #This version of the calculator is a very basic addition of Hit Chance to the regular calculator.
 #To use this, set the HitChance variable to whatever hit chance you wish to test.
@@ -247,6 +248,9 @@ import statistics
 import collections
 import math
 import sys
+
+if os.environ.get('TEST') is not None:
+    random.seed('battlebrothers')
 
 #Attacker presets:
 if APreAncientSword == 1:

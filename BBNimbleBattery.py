@@ -1,6 +1,7 @@
 #Battle Brothers Damage Calculator -- Nimble Battery Version 1.6.3:
 #Welcome. Modify the below values as necessary until you reach the line ----- break.
-#The calculator expects you to make smart decisions, such as not giving Xbow Mastery to a Hammer. 
+#The calculator expects you to make smart decisions, such as not giving Xbow Mastery to a Hammer.
+import os
 
 #This version of the calculator will run 15 different Nimble lines given the scenario you provide.
 
@@ -196,6 +197,9 @@ import statistics
 import collections
 import math
 import sys
+
+if os.environ.get('TEST') is not None:
+    random.seed('battlebrothers')
 
 #Attacker presets:
 if APreAncientSword == 1:

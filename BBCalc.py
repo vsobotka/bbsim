@@ -3,6 +3,7 @@
 #The calculator expects you to make smart decisions, such as not giving Xbow Mastery to a Hammer. 
 #Written in Python 3.7, earlier versions of Python 3 should work, but Python 2 will not.
 #If you wish to cancel an ongoing calculation, use ctrl + c.
+import os
 
 #Attacker and Defender presets are provided further down.
 #If you wish to use an attacker preset, skip the sections related to attacker settings and go to the attacker preset section.
@@ -247,6 +248,9 @@ import statistics
 import collections
 import math
 import sys
+
+if os.environ.get('TEST') is not None:
+    random.seed('battlebrothers')
 
 #Attacker presets:
 if APreAncientSword == 1:
