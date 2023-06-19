@@ -354,16 +354,15 @@ if Boneplate == 1:
 
 #Nimble calculation:
 def NimbleCalc():
-    global NimbleMod
     NimFat = Fatigue
     if NimFat > 0 and Nimble == 1:
         NimFat *= -1
     NimFat = min(0, NimFat + 15)
     if Nimble == 1:
         NimbleMod = 1.0 - 0.6 + pow(abs(NimFat),1.23)*.01
-        NimbleMod = min(1,NimbleMod)
+        return min(1, NimbleMod)
     else:
-        NimbleMod = 1
+        return 1
 
 #Indomitable:
 if Indomitable == 1:
@@ -394,9 +393,7 @@ if Indomitable == 1 and BleedDamage > 0:
 
 print("-----") #Added for readability. If this annoys you then remove this line.
 
-def calc():
-    global Headshotchance,Ignore,HHStack
-
+def calc(Ignore):
     #Headshot damage modifiers:
     HeadMod = 1.5
     if SteelBrow == 1:
@@ -537,7 +534,7 @@ def calc():
     hits_until_1st_poison = [] #This list will hold how many hits until first poisoning against Ambushers (only displays if Ambusher is checked)
 
     print("HP = " + str(Def_HP) + ", Helmet = " + str(Def_Helmet) + ", Armor = " + str(Def_Armor))
-    NimbleCalc()
+    NimbleMod = NimbleCalc()
     if Nimble == 1:
         print ("Nimble%: " + str(NimbleMod))
 
@@ -1224,7 +1221,7 @@ def calc():
 
 #The following will repeatedly run the scenario with different weapons.
 print("Winged Mace:")
-calc()
+calc(Ignore)
 
 Mind = 25
 Maxd = 55
@@ -1232,12 +1229,12 @@ Headchance = 35
 Ignore = 30
 ArmorMod = 1
 print("Flail:")
-calc()
+calc(Ignore)
 
 Headchance = 100
 Ignore = 30
 print("Flail - Lash Only:")
-calc()
+calc(Ignore)
 
 Mind = 30
 Maxd = 75
@@ -1245,12 +1242,12 @@ Headchance = 35
 Ignore = 30
 Flail3Head = 1
 print("3H Flail:")
-calc()
+calc(Ignore)
 
 Headchance = 100
 Ignore = 30
 print("3H Flail - Hail Only:")
-calc()
+calc(Ignore)
 
 Mind = 30
 Maxd = 40
@@ -1260,12 +1257,12 @@ ArmorMod = 2.25
 Flail3Head = 0
 Hammer10 = 1
 print("Warhammer:")
-calc()
+calc(Ignore)
 
 Ignore = 50
 DestroyArmorMastery = 1
 print("Warhammer - Destroy Armor Once:")
-calc()
+calc(Ignore)
 
 Mind = 35
 Maxd = 55
@@ -1275,12 +1272,12 @@ Hammer10 = 0
 DestroyArmorMastery = 0
 Axe1H = 1
 print("Fighting Axe:")
-calc()
+calc(Ignore)
 
 Maxd = 65
 Ignore = 30
 print("Head Splitter:")
-calc()
+calc(Ignore)
 
 Mind = 40
 Maxd = 60
@@ -1292,12 +1289,12 @@ if Indomitable == 1:
     BleedDamage = 5
 CleaverMastery = 1
 print("Military Cleaver:")
-calc()
+calc(Ignore)
 
 Ignore = 25
 SmartDecap50 = 1
 print("Military Cleaver - Decap at 50%:")
-calc()
+calc(Ignore)
 
 Mind = 35
 Maxd = 55
@@ -1305,12 +1302,12 @@ Ignore = 25
 ArmorMod = 1.2
 SmartDecap50 = 0
 print("Khopesh:")
-calc()
+calc(Ignore)
 
 Ignore = 25
 SmartDecap50 = 1
 print("Khopesh - Decap at 50%:")
-calc()
+calc(Ignore)
 
 Mind = 40
 Maxd = 70
@@ -1318,12 +1315,12 @@ Ignore = 25
 ArmorMod = 1.1
 SmartDecap = 0
 print("Head Chopper:")
-calc()
+calc(Ignore)
 
 Ignore = 25
 SmartDecap50 = 1
 print("Head Chopper - Decap at 50%:")
-calc()
+calc(Ignore)
 
 Mind = 45
 Maxd = 50
@@ -1333,13 +1330,13 @@ BleedDamage = 0
 CleaverMastery = 0
 SmartDecap50 = 0
 print("Noble Sword:")
-calc()
+calc(Ignore)
 
 Ignore = 20
 ArmorMod = .75
 ShamshirMastery = 1
 print("Shamshir - Special:")
-calc()
+calc(Ignore)
 
 Mind = 20
 Maxd = 40
@@ -1347,7 +1344,7 @@ Ignore = 20
 ArmorMod = .7
 Shamshir = 0
 print("Rondel Dagger:")
-calc()
+calc(Ignore)
 
 Mind = 30
 Maxd = 45
@@ -1355,7 +1352,7 @@ Ignore = 20
 ArmorMod = .7
 Deathblow = 1
 print("Qatal Dagger - Deathblow:")
-calc()
+calc(Ignore)
 
 Mind = 35
 Maxd = 40
@@ -1363,7 +1360,7 @@ Ignore = 25
 ArmorMod = 1
 Deathblow = 0
 print("Fighting Spear:")
-calc()
+calc(Ignore)
 
 Mind = 35
 Maxd = 50
@@ -1372,14 +1369,14 @@ ArmorMod = .8
 DoubleGrip = 0
 R2Throw = 1
 print("Heavy Javelins - 2 Range:")
-calc()
+calc(Ignore)
 
 Mind = 30
 Ignore = 25
 ArmorMod = 1.15
 Headchance = 30
 print("Heavy Axes - 2 Range:")
-calc()
+calc(Ignore)
 
 #CREDITS:
 #Author: turtle225
