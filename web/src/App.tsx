@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
+import * as pyscript from "../python/BBCalc.py";
 
 declare const loadPyodide: any;
 
 async function hello_python() {
   const pyodide = await loadPyodide();
-  return await pyodide.runPythonAsync("1+3");
+  return await pyodide.runPythonAsync(pyscript.default);
 }
 
 export function App() {
-  const [output, setOutput] = useState("(loading...)");
+  const [output, setOutput] = useState("(initializing...)");
 
   useEffect(() => {
     const run = async () => {
