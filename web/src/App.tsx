@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import * as pyscript from "../python/BBCalc.py";
+import { Button, Text } from "@mantine/core";
 
 declare const loadPyodide: any;
 
@@ -9,17 +10,30 @@ async function hello_python() {
 }
 
 export function App() {
-  const [output, setOutput] = useState("(initializing...)");
+  const [output, setOutput] = useState("");
+  const [error, setError] = useState(null);
+  const [running, setRunning] = useState(false);
 
-  useEffect(() => {
-    const run = async () => {
-      const out = await hello_python();
-      setOutput(out);
-    };
-    run()
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
-  }, []);
+  const run = async () => {
+    const out = await hello_python();
+    setOutput(out);
+  };
 
-  return <h1>{output}</h1>;
+  return (
+    <>
+      <Button
+        onClick={() => {
+          setError(null);
+          setRunning(true);
+          run()
+            .catch((e) => setError(e.toString()))
+            .finally(() => setRunning(false));
+        }}
+      >
+        My Button
+      </Button>
+      <Text c="red">{error}</Text>
+      <Text>{running ? "Running script..." : output}</Text>
+    </>
+  );
 }
