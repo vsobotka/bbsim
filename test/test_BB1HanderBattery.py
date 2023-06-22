@@ -184,7 +184,7 @@ Chance of first heavy injury in 2.0799699172724995 hits on average.
 -----
 """
         with subprocess.Popen(
-                ['python', '../BB1HanderBattery.py'],
+                ['python', '../web/python/BB1HanderBattery.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 env={**os.environ, 'TEST': ''}

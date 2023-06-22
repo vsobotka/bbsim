@@ -299,7 +299,7 @@ Chance of first heavy injury in 1.0944 hits on average.
 3.4477314285714287 hits to die on average against this test group.
 """
         with subprocess.Popen(
-                ['python', '../BBEnemiesVsDefender.py'],
+                ['python', '../web/python/BBEnemiesVsDefender.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 env={**os.environ, 'TEST': ''}

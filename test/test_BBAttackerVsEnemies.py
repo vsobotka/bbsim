@@ -261,7 +261,7 @@ No chance of heavy injury.
 5.579556666666667 hits to kill on average against this test group.
 """
         with subprocess.Popen(
-                ['python', '../BBAttackerVsEnemies.py'],
+                ['python', '../web/python/BBAttackerVsEnemies.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 env={**os.environ, 'TEST': ''}

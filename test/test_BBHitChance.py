@@ -16,7 +16,7 @@ Chance of first heavy injury in 5.6538995703311485 swings on average.
 -----
 """
         with subprocess.Popen(
-                ['python', '../BBHitChance.py'],
+                ['python', '../web/python/BBHitChance.py'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 env={**os.environ, 'TEST': ''}
