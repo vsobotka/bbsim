@@ -15,7 +15,7 @@ Chance of first heavy injury in 2.8984 hits on average.
 -----
 """
         with subprocess.Popen(
-                ['python', '../web/python/BBCalc.py'],
+                ['python', '-c', 'from python.BBCalc import BBCalc; BBCalc()'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
                 env={**os.environ, 'TEST': ''}

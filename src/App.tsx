@@ -6,10 +6,7 @@ export function App() {
   const [output, setOutput] = useState<string[]>([]);
   const [error, setError] = useState(null);
   const [running, setRunning] = useState(false);
-  const BBCalcKwargs = {
-    test2: 4,
-    test_var: 5,
-  };
+  const BBCalcKwargs = { Mind: 55 };
 
   return (
     <>
