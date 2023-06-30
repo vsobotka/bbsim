@@ -15,7 +15,7 @@ async function runScript(
   });
   pyodide.runPython(scriptToRun);
   const BBCalc = pyodide.globals.get("BBCalc");
-  alert(BBCalc.callKwargs(kwargs));
+  BBCalc.callKwargs(kwargs);
 }
 
 export function runBBCalc(
