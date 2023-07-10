@@ -15,10 +15,9 @@ Chance of first heavy injury in 2.8984 hits on average.
 -----
 """
         with subprocess.Popen(
-                ['python', '-c', 'from python.BBCalc import BBCalc; BBCalc()'],
+                ['python', '-c', 'from python.BBCalc import BBCalc; BBCalc(random_seed="battlebrothers")'],
                 stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                env={**os.environ, 'TEST': ''}
+                stderr=subprocess.STDOUT
         ) as p:
             stdout = p.stdout.read().decode('utf-8')
             self.maxDiff = None

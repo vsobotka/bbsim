@@ -255,11 +255,11 @@ def BBCalc(
         DPreOutlawHeavy=0,  # 75hp, 125/105.
         DPreConscript=0,  # 55hp, 105/110, Nimble. (-16 Fat)
         DPreOfficer=0,  # 100hp, 290/290, Forge.
-        DPreAssassinHeavy=0  # 80hp, 140/120, Nimble. (-15 Fat)
+        DPreAssassinHeavy=0,  # 80hp, 140/120, Nimble. (-15 Fat)
+        random_seed=None
 ):
 
-    if os.environ.get('TEST') is not None:
-        random.seed('battlebrothers')
+    random.seed(random_seed)
 
     # Attacker presets:
     if APreAncientSword == 1:
