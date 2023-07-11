@@ -1,4 +1,3 @@
-import os
 import subprocess
 import unittest
 
@@ -184,10 +183,9 @@ Chance of first heavy injury in 2.0799699172724995 hits on average.
 -----
 """
         with subprocess.Popen(
-                ['python', '../web/python/BB1HanderBattery.py'],
+                ['python', '-c', 'from python.BB1HanderBattery import BB1HanderBattery; BB1HanderBattery(random_seed="battlebrothers")'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
-                env={**os.environ, 'TEST': ''}
         ) as p:
             stdout = p.stdout.read().decode('utf-8')
             self.maxDiff = None
