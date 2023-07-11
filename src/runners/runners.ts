@@ -1,4 +1,5 @@
 import * as BBCalc from "../../python/BBCalc.py";
+import * as utils from "../../python/utils.py";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import type { loadPyodide } from "pyodide";
@@ -23,4 +24,14 @@ export function runBBCalc(
   kwargs: Record<string, unknown> = {}
 ) {
   return runScript(BBCalc.default, handleOutput, kwargs);
+}
+
+export async function getBBCalcDefaults() {
+  const pyodide = await loadPyodide();
+  pyodide.runPython(BBCalc.default);
+  pyodide.runPython(utils.default);
+  const defArgs = pyodide.globals.get("get_default_args");
+  const BBCalcFunc = pyodide.globals.get("BBCalc");
+
+  return defArgs(BBCalcFunc).toJs();
 }
