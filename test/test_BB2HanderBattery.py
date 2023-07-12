@@ -200,18 +200,17 @@ Chance of first heavy injury in 2.928831320040751 hits on average.
 -----
 Handgonne
 HP = 100, Helmet = 120, Armor = 95
-Death in 5.12285 hits on average.
-StDev: 0.901054089621495
-% Hits to die: [(3, 0.735), (4, 26.634999999999998), (5, 38.49), (6, 28.005000000000003), (7, 6.02), (8, 0.11499999999999999)]
-First injury in 4.053563390847712 hits on average.
-Chance of first heavy injury in 4.60414501039501 hits on average.
+Death in 4.3648 hits on average.
+StDev: 0.7024568543915093
+% Hits to die: [(3, 9.34), (4, 48.54), (5, 38.464999999999996), (6, 3.61), (7, 0.045)]
+First injury in 3.533531516098151 hits on average.
+Chance of first heavy injury in 4.000577242225269 hits on average.
 -----
 """
         with subprocess.Popen(
-                ['python', '../web/python/BB2HanderBattery.py'],
+                ['python', '-c', 'from python.BB2HanderBattery import BB2HanderBattery; BB2HanderBattery(random_seed="battlebrothers")'],
                 stdout=subprocess.PIPE,
                 stderr=subprocess.STDOUT,
-                env={**os.environ, 'TEST': ''}
         ) as p:
             stdout = p.stdout.read().decode('utf-8')
             self.maxDiff = None
