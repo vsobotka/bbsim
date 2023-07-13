@@ -43,7 +43,7 @@ class TestBBCalc(unittest.TestCase):
         self.run_script_test(BBCalc_original_stdout, 'BBCalc')
 
     def test_BBEnemiesVsDefender(self):
-        self.run_direct_test(BBEnemiesVsDefender_original_stdout, 'BBEnemiesVsDefender')
+        self.run_script_test(BBEnemiesVsDefender_original_stdout, 'BBEnemiesVsDefender')
 
     def test_BBHitChance(self):
         self.run_direct_test(BBHitChance_original_stdout, 'BBHitChance')
