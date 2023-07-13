@@ -19,17 +19,6 @@ class TestBBCalc(unittest.TestCase):
             self.maxDiff = None
             self.assertEqual(original_stdout, stdout)
 
-    def run_direct_test(self, original_stdout, script):
-        with subprocess.Popen(
-                ['python', '../python/{script}.py'.format(script=script)],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT,
-                env={**os.environ, 'TEST': ''}
-        ) as p:
-            stdout = p.stdout.read().decode('utf-8')
-            self.maxDiff = None
-            self.assertEqual(original_stdout, stdout)
-
     def test_BB1HanderBattery(self):
         self.run_script_test(BB1HanderBattery_original_output, 'BB1HanderBattery')
 
