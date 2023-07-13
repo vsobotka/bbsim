@@ -37,7 +37,7 @@ class TestBBCalc(unittest.TestCase):
         self.run_script_test(BB2HanderBattery_original_stdout, 'BB2HanderBattery')
 
     def test_BBAttackerVsEnemies(self):
-        self.run_direct_test(BBAttackerVsEnemies_original_stdout, 'BBAttackerVsEnemies')
+        self.run_script_test(BBAttackerVsEnemies_original_stdout, 'BBAttackerVsEnemies')
 
     def test_BBCalc(self):
         self.run_script_test(BBCalc_original_stdout, 'BBCalc')
