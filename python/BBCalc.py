@@ -181,8 +181,7 @@ def BBCalc(
         APreCryptCleaver=0,  # Ancient Dead: 60-80, 25% Ignore, 120% Armor, Fearsome, Cleaver Mastery.
         APreKhopesh=0,  # Necrosavant: 35-55, 25% Ignore, 120% Armor, HeadHunter, Crippling, Double Grip, CleaverBleed.
         APreFHGreatAxe=0,  # Fallen Hero: 80-100, 40 %Ignore, 150% Armor, Fearsome, Split Man.
-        APreBerserkChain=0,
-        # Orc Berserker: 50-100, 30% Ignore, 125% Armor, 40% Head, TwoHander20, Flail2HPound, FlailMastery, Berserker.
+        APreBerserkChain=0, # Orc Berserker: 50-100, 30% Ignore, 125% Armor, 40% Head, TwoHander20, Flail2HPound, FlailMastery, Berserker.
         APreHeadSplitter=0,  # Orc Young/Warrior: 35-65, 30% Ignore, 130% Armor, 1HAxe, Warrior.
         APreHeadChopper=0,  # Orc Young/Warrior: 40-70, 25% Ignore, 110% Armor, Cleaver Mastery, Warrior.
         APreMansplitter=0,  # Orc Warlord: 90-120, 40% Ignore, 160% Armor, Split Man, Fearsome, Warlord.
