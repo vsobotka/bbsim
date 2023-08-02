@@ -173,4 +173,19 @@ export const attackers = [
     id: "APreNachTier3",
     faction: Factions.Beasts,
   },
+  {
+    name: "Lindwurm - Head",
+    id: "APreLindwurm",
+    faction: Factions.Beasts,
+  },
+  {
+    name: "Unhold",
+    id: "APreUnhold",
+    faction: Factions.Beasts,
+  },
+  {
+    name: "Schrat",
+    id: "APreSchrat",
+    faction: Factions.Beasts,
+  },
 ];
