@@ -4,6 +4,7 @@ export enum Factions {
   Beasts = "Beasts",
   Brigands = "Brigands",
   CityState = "City State",
+  Company = "Company",
   Goblins = "Goblins",
   NobleHouse = "Noble House",
   Nomads = "Nomads",
