@@ -12,7 +12,13 @@ export enum Factions {
   Undead = "Undead",
 }
 
-export const attackers = [
+export type Preset = {
+  id: string;
+  name: string;
+  faction: Factions;
+};
+
+export const attackers: Preset[] = [
   {
     name: "Ancient Dead - Sword",
     id: "APreAncientSword",

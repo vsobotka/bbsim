@@ -1,14 +1,16 @@
-import { attackers, Factions } from "./attackers.ts";
+import { Factions, Preset } from "./attackers.ts";
 import { Button, SimpleGrid, Title } from "@mantine/core";
 
 type Props = {
   selectedPreset: string | null;
   setSelectedPreset: (preset: string | null) => void;
+  presets: Preset[];
 };
 
-export function AttackerPresetSelection({
+export function PresetSelectionPage({
   selectedPreset,
   setSelectedPreset,
+  presets,
 }: Props) {
   return (
     <SimpleGrid
@@ -24,27 +26,24 @@ export function AttackerPresetSelection({
         return (
           <div key={faction} style={{ width: 250 }}>
             <Title order={5}>{faction}</Title>
-            {attackers
+            {presets
               .filter(
-                (attacker) =>
-                  attacker.faction ===
-                  Factions[faction as keyof typeof Factions]
+                (preset) =>
+                  preset.faction === Factions[faction as keyof typeof Factions]
               )
-              .map((attacker) => {
+              .map((preset) => {
                 return (
                   <Button
-                    key={attacker.id}
+                    key={preset.id}
                     style={{ display: "block" }}
-                    variant={
-                      selectedPreset === attacker.id ? "filled" : "subtle"
-                    }
+                    variant={selectedPreset === preset.id ? "filled" : "subtle"}
                     onClick={() => {
-                      selectedPreset === attacker.id
+                      selectedPreset === preset.id
                         ? setSelectedPreset(null)
-                        : setSelectedPreset(attacker.id);
+                        : setSelectedPreset(preset.id);
                     }}
                   >
-                    {attacker.name}
+                    {preset.name}
                   </Button>
                 );
               })}

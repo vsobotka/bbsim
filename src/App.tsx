@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
-import { AttackerPresetSelection } from "./presets/AttackerPresetSelection.tsx";
 import { attackers } from "./presets/attackers.ts";
+import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
 
 const scripts = [
   "BB1HanderBattery",
@@ -22,7 +22,8 @@ export function App() {
   const [args, setArgs] = useState(null as null | Record<string, number>);
   const [script, setScript] = useState(scripts[0]);
   const [selectedPreset, setSelectedPreset] = useState(null as null | string);
-  const [showPresetSelection, setShowPresetSelection] = useState(false);
+  const [showAttackerPresetSelection, setShowAttackerPresetSelection] =
+    useState(false);
 
   useEffect(() => {
     getScriptDefaults(script).then((defaults) => {
@@ -53,13 +54,14 @@ export function App() {
       attackers.some((attacker) => attacker.id === key)
     );
 
-  if (showPresetSelection) {
+  if (showAttackerPresetSelection) {
     return (
-      <AttackerPresetSelection
+      <PresetSelectionPage
+        presets={attackers}
         selectedPreset={selectedPreset}
         setSelectedPreset={(preset) => {
           setSelectedPreset(preset);
-          setShowPresetSelection(false);
+          setShowAttackerPresetSelection(false);
         }}
       />
     );
@@ -99,7 +101,7 @@ export function App() {
           <br />
           {"Attacker preset: "}
           <Button
-            onClick={() => setShowPresetSelection(true)}
+            onClick={() => setShowAttackerPresetSelection(true)}
             style={{ marginBottom: 15 }}
             variant={selectedPreset ? "light" : "subtle"}
           >

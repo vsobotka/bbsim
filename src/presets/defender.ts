@@ -1,6 +1,6 @@
-import { Factions } from "./attackers.ts";
+import { Factions, Preset } from "./attackers.ts";
 
-export const defenders = [
+export const defenders: Preset[] = [
   {
     id: "DPreNimbleBro",
     name: "Nimble Bro",
