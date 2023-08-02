@@ -21,7 +21,9 @@ export function App() {
   const [running, setRunning] = useState(false);
   const [args, setArgs] = useState(null as null | Record<string, number>);
   const [script, setScript] = useState(scripts[0]);
-  const [selectedPreset, setSelectedPreset] = useState(null as null | string);
+  const [selectedAttackerPreset, setSelectedAttackerPreset] = useState(
+    null as null | string
+  );
   const [showAttackerPresetSelection, setShowAttackerPresetSelection] =
     useState(false);
 
@@ -41,7 +43,7 @@ export function App() {
           (addition) => {
             setOutput((output) => [...output, addition]);
           },
-          { ...args, [selectedPreset ?? ""]: 1 }
+          { ...args, [selectedAttackerPreset ?? ""]: 1 }
         )
           .catch((e) => setError(e.toString()))
           .finally(() => setRunning(false));
@@ -58,9 +60,9 @@ export function App() {
     return (
       <PresetSelectionPage
         presets={attackers}
-        selectedPreset={selectedPreset}
+        selectedPreset={selectedAttackerPreset}
         setSelectedPreset={(preset) => {
-          setSelectedPreset(preset);
+          setSelectedAttackerPreset(preset);
           setShowAttackerPresetSelection(false);
         }}
       />
@@ -103,11 +105,11 @@ export function App() {
           <Button
             onClick={() => setShowAttackerPresetSelection(true)}
             style={{ marginBottom: 15 }}
-            variant={selectedPreset ? "light" : "subtle"}
+            variant={selectedAttackerPreset ? "light" : "subtle"}
           >
-            {selectedPreset
-              ? attackers.find((att) => att.id === selectedPreset)?.name
-              : "Select attacker preset or leave empty"}
+            {selectedAttackerPreset
+              ? attackers.find((att) => att.id === selectedAttackerPreset)?.name
+              : "Select or leave empty"}
           </Button>
           <br />
         </>
