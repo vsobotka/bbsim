@@ -11,7 +11,7 @@ export enum Factions {
   Undead = "Undead",
 }
 
-export const attacker = [
+export const attackers = [
   {
     name: "Ancient Dead - Sword",
     id: "APreAncientSword",

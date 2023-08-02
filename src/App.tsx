@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
 import { AttackerPresetSelection } from "./presets/AttackerPresetSelection.tsx";
-import { attacker } from "./presets/attacker.ts";
+import { attackers } from "./presets/attackers.ts";
 
 const scripts = [
   "BB1HanderBattery",
@@ -50,7 +50,7 @@ export function App() {
   const canShowAttackerPreset =
     args &&
     Object.entries(args).some(([key]) =>
-      attacker.some((attacker) => attacker.id === key)
+      attackers.some((attacker) => attacker.id === key)
     );
 
   if (showPresetSelection) {
@@ -104,7 +104,7 @@ export function App() {
             variant={selectedPreset ? "light" : "subtle"}
           >
             {selectedPreset
-              ? attacker.find((att) => att.id === selectedPreset)?.name
+              ? attackers.find((att) => att.id === selectedPreset)?.name
               : "Select attacker preset or leave empty"}
           </Button>
           <br />
@@ -112,7 +112,7 @@ export function App() {
       )}
       {args &&
         Object.entries(args)
-          .filter(([key]) => !attacker.some((att) => att.id === key))
+          .filter(([key]) => !attackers.some((att) => att.id === key))
           .map(([key, value]) => (
             <TextInput
               style={{ width: 120, display: "inline-block" }}

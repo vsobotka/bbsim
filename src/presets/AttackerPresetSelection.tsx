@@ -1,4 +1,4 @@
-import { attacker, Factions } from "./attacker.ts";
+import { attackers, Factions } from "./attackers.ts";
 import { Button, SimpleGrid, Title } from "@mantine/core";
 
 type Props = {
@@ -24,7 +24,7 @@ export function AttackerPresetSelection({
         return (
           <div key={faction} style={{ width: 250 }}>
             <Title order={5}>{faction}</Title>
-            {attacker
+            {attackers
               .filter(
                 (attacker) =>
                   attacker.faction ===
