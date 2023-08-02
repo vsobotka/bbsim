@@ -136,6 +136,7 @@ export function App() {
       {args &&
         Object.entries(args)
           .filter(([key]) => !attackers.some((att) => att.id === key))
+          .filter(([key]) => !defenders.some((att) => att.id === key))
           .map(([key, value]) => (
             <TextInput
               style={{ width: 120, display: "inline-block" }}
