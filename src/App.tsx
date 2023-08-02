@@ -3,6 +3,7 @@ import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
 import { attackers } from "./presets/attackers.ts";
 import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
+import { PresetButton } from "./presets/PresetButton.tsx";
 
 const scripts = [
   "BB1HanderBattery",
@@ -101,19 +102,16 @@ export function App() {
       {canShowAttackerPreset && (
         <>
           <br />
-          {"Attacker preset: "}
-          <Button
+          <PresetButton
+            label={"Attacker preset: "}
+            selectedPreset={selectedAttackerPreset}
             onClick={() => setShowAttackerPresetSelection(true)}
-            style={{ marginBottom: 15 }}
-            variant={selectedAttackerPreset ? "light" : "subtle"}
-          >
-            {selectedAttackerPreset
-              ? attackers.find((att) => att.id === selectedAttackerPreset)?.name
-              : "Select or leave empty"}
-          </Button>
-          <br />
+            onClear={() => setSelectedAttackerPreset(null)}
+            presets={attackers}
+          />
         </>
       )}
+      <br />
       {args &&
         Object.entries(args)
           .filter(([key]) => !attackers.some((att) => att.id === key))

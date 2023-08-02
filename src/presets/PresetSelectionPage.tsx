@@ -32,13 +32,15 @@ export function PresetSelectionPage({
                   preset.faction === Factions[faction as keyof typeof Factions]
               )
               .map((preset) => {
+                const selected = selectedPreset === preset.id;
+
                 return (
                   <Button
                     key={preset.id}
                     style={{ display: "block" }}
-                    variant={selectedPreset === preset.id ? "filled" : "subtle"}
+                    variant={selected ? "filled" : "subtle"}
                     onClick={() => {
-                      selectedPreset === preset.id
+                      selected
                         ? setSelectedPreset(null)
                         : setSelectedPreset(preset.id);
                     }}
