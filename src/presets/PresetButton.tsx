@@ -7,6 +7,7 @@ type Props = {
   onClick: () => void;
   onClear: () => void;
   presets: Preset[];
+  args: Record<string, number> | null;
 };
 
 export function PresetButton({
@@ -15,7 +16,20 @@ export function PresetButton({
   onClick,
   onClear,
   presets,
+  args,
 }: Props) {
+  if (!args) {
+    return null;
+  }
+
+  if (
+    !Object.entries(args).some(([key]) =>
+      presets.some((preset) => preset.id === key)
+    )
+  ) {
+    return null;
+  }
+
   return (
     <>
       <br />

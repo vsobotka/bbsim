@@ -61,17 +61,6 @@ export function App() {
       }
     : undefined;
 
-  const canShowAttackerPreset =
-    args &&
-    Object.entries(args).some(([key]) =>
-      attackers.some((preset) => preset.id === key)
-    );
-  const canShowDefenderPreset =
-    args &&
-    Object.entries(args).some(([key]) =>
-      defenders.some((preset) => preset.id === key)
-    );
-
   if (showAttackerPresetSelection) {
     return (
       <PresetSelectionPage
@@ -127,24 +116,22 @@ export function App() {
       <br />
 
       {!args && <Text>Loading...</Text>}
-      {canShowAttackerPreset && (
-        <PresetButton
-          label={"Attacker preset: "}
-          selectedPreset={selectedAttackerPreset}
-          onClick={() => setShowAttackerPresetSelection(true)}
-          onClear={() => setSelectedAttackerPreset(null)}
-          presets={attackers}
-        />
-      )}
-      {canShowDefenderPreset && (
-        <PresetButton
-          label={"Defender preset: "}
-          selectedPreset={selectedDefenderPreset}
-          onClick={() => setShowDefenderPresetSelection(true)}
-          onClear={() => setSelectedDefenderPreset(null)}
-          presets={defenders}
-        />
-      )}
+      <PresetButton
+        label={"Attacker preset: "}
+        selectedPreset={selectedAttackerPreset}
+        onClick={() => setShowAttackerPresetSelection(true)}
+        onClear={() => setSelectedAttackerPreset(null)}
+        presets={attackers}
+        args={args}
+      />
+      <PresetButton
+        label={"Defender preset: "}
+        selectedPreset={selectedDefenderPreset}
+        onClick={() => setShowDefenderPresetSelection(true)}
+        onClear={() => setSelectedDefenderPreset(null)}
+        presets={defenders}
+        args={args}
+      />
       <br />
       {args &&
         Object.entries(args)
