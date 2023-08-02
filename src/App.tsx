@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
+import { AttackerPresetSelection } from "./presets/AttackerPresetSelection.tsx";
+import { attacker } from "./presets/attacker.ts";
 
 const scripts = [
   "BB1HanderBattery",
@@ -19,6 +21,8 @@ export function App() {
   const [running, setRunning] = useState(false);
   const [args, setArgs] = useState(null as null | Record<string, number>);
   const [script, setScript] = useState(scripts[0]);
+  const [selectedPreset, setSelectedPreset] = useState(null as null | string);
+  const [showPresetSelection, setShowPresetSelection] = useState(false);
 
   useEffect(() => {
     getScriptDefaults(script).then((defaults) => {
@@ -36,17 +40,36 @@ export function App() {
           (addition) => {
             setOutput((output) => [...output, addition]);
           },
-          args
+          { ...args, [selectedPreset ?? ""]: 1 }
         )
           .catch((e) => setError(e.toString()))
           .finally(() => setRunning(false));
       }
     : undefined;
 
+  const canShowAttackerPreset =
+    args &&
+    Object.entries(args).some(([key]) =>
+      attacker.some((attacker) => attacker.id === key)
+    );
+
+  if (showPresetSelection) {
+    return (
+      <AttackerPresetSelection
+        selectedPreset={selectedPreset}
+        setSelectedPreset={(preset) => {
+          setSelectedPreset(preset);
+          setShowPresetSelection(false);
+        }}
+      />
+    );
+  }
+
   return (
     <>
       <NativeSelect
         data={scripts}
+        value={script}
         onChange={(e) => {
           setOutput([]);
           setArgs(null);
@@ -71,17 +94,35 @@ export function App() {
       <br />
 
       {!args && <Text>Loading...</Text>}
+      {canShowAttackerPreset && (
+        <>
+          <br />
+          {"Attacker preset: "}
+          <Button
+            onClick={() => setShowPresetSelection(true)}
+            style={{ marginBottom: 15 }}
+            variant={selectedPreset ? "light" : "subtle"}
+          >
+            {selectedPreset
+              ? attacker.find((att) => att.id === selectedPreset)?.name
+              : "Select attacker preset or leave empty"}
+          </Button>
+          <br />
+        </>
+      )}
       {args &&
-        Object.entries(args).map(([key, value]) => (
-          <TextInput
-            style={{ width: 120, display: "inline-block" }}
-            label={key}
-            onChange={(e) =>
-              setArgs({ ...args, [key]: Number(e.currentTarget.value) })
-            }
-            value={value}
-          />
-        ))}
+        Object.entries(args)
+          .filter(([key]) => !attacker.some((att) => att.id === key))
+          .map(([key, value]) => (
+            <TextInput
+              style={{ width: 120, display: "inline-block" }}
+              label={key}
+              onChange={(e) =>
+                setArgs({ ...args, [key]: Number(e.currentTarget.value) })
+              }
+              value={value}
+            />
+          ))}
       <Text c="red">{error}</Text>
       <Text span style={{ whiteSpace: "pre" }}>
         {running ? "Running script..." : output.join("\n")}
