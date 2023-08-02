@@ -4,6 +4,7 @@ import { getScriptDefaults, runScript } from "./runners/runners.ts";
 import { attackers } from "./presets/attackers.ts";
 import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
 import { PresetButton } from "./presets/PresetButton.tsx";
+import { defenders } from "./presets/defender.ts";
 
 const scripts = [
   "BB1HanderBattery",
@@ -25,7 +26,12 @@ export function App() {
   const [selectedAttackerPreset, setSelectedAttackerPreset] = useState(
     null as null | string
   );
+  const [selectedDefenderPreset, setSelectedDefenderPreset] = useState(
+    null as null | string
+  );
   const [showAttackerPresetSelection, setShowAttackerPresetSelection] =
+    useState(false);
+  const [showDefenderPresetSelection, setShowDefenderPresetSelection] =
     useState(false);
 
   useEffect(() => {
@@ -44,7 +50,11 @@ export function App() {
           (addition) => {
             setOutput((output) => [...output, addition]);
           },
-          { ...args, [selectedAttackerPreset ?? ""]: 1 }
+          {
+            ...args,
+            [selectedAttackerPreset ?? ""]: 1,
+            [selectedDefenderPreset ?? ""]: 1,
+          }
         )
           .catch((e) => setError(e.toString()))
           .finally(() => setRunning(false));
@@ -54,7 +64,12 @@ export function App() {
   const canShowAttackerPreset =
     args &&
     Object.entries(args).some(([key]) =>
-      attackers.some((attacker) => attacker.id === key)
+      attackers.some((preset) => preset.id === key)
+    );
+  const canShowDefenderPreset =
+    args &&
+    Object.entries(args).some(([key]) =>
+      defenders.some((preset) => preset.id === key)
     );
 
   if (showAttackerPresetSelection) {
@@ -65,6 +80,19 @@ export function App() {
         setSelectedPreset={(preset) => {
           setSelectedAttackerPreset(preset);
           setShowAttackerPresetSelection(false);
+        }}
+      />
+    );
+  }
+
+  if (showDefenderPresetSelection) {
+    return (
+      <PresetSelectionPage
+        presets={defenders}
+        selectedPreset={selectedDefenderPreset}
+        setSelectedPreset={(preset) => {
+          setSelectedDefenderPreset(preset);
+          setShowDefenderPresetSelection(false);
         }}
       />
     );
@@ -100,16 +128,22 @@ export function App() {
 
       {!args && <Text>Loading...</Text>}
       {canShowAttackerPreset && (
-        <>
-          <br />
-          <PresetButton
-            label={"Attacker preset: "}
-            selectedPreset={selectedAttackerPreset}
-            onClick={() => setShowAttackerPresetSelection(true)}
-            onClear={() => setSelectedAttackerPreset(null)}
-            presets={attackers}
-          />
-        </>
+        <PresetButton
+          label={"Attacker preset: "}
+          selectedPreset={selectedAttackerPreset}
+          onClick={() => setShowAttackerPresetSelection(true)}
+          onClear={() => setSelectedAttackerPreset(null)}
+          presets={attackers}
+        />
+      )}
+      {canShowDefenderPreset && (
+        <PresetButton
+          label={"Defender preset: "}
+          selectedPreset={selectedDefenderPreset}
+          onClick={() => setShowDefenderPresetSelection(true)}
+          onClear={() => setSelectedDefenderPreset(null)}
+          presets={defenders}
+        />
       )}
       <br />
       {args &&
