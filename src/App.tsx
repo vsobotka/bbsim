@@ -46,15 +46,22 @@ export function App() {
         setError(null);
         setRunning(true);
         setOutput([]);
+
+        const kwargs = { ...args };
+        if (selectedAttackerPreset) {
+          kwargs[selectedAttackerPreset] = 1;
+        }
+        if (selectedDefenderPreset) {
+          kwargs[selectedDefenderPreset] = 1;
+        }
+
         runScript(
           script,
           (addition) => {
             setOutput((output) => [...output, addition]);
           },
           {
-            ...args,
-            [selectedAttackerPreset ?? ""]: 1,
-            [selectedDefenderPreset ?? ""]: 1,
+            ...kwargs,
           }
         )
           .catch((e) => setError(e.toString()))
