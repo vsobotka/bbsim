@@ -1,4 +1,4 @@
-# Battle Brothers Damage Calculator -- Hit Chance Version 1.6.3:
+# Battle Brothers Damage Calculator -- Hit Chance Version 1.6.4:
 # Welcome. Modify the below values as necessary until you reach the line ----- break.
 
 # This version of the calculator is a very basic addition of Hit Chance to the regular calculator.
@@ -197,7 +197,7 @@ def BBHitChance(
         APreWarbow=0,  # Master Archer: 50-70, 35% Ignore, 65% Armor, Crippling, Executioner, HeadHunter, Master Archer.
         APrePoleMace=0,  # Conscript: 60-75, 40% Ignore, 120% Armor, 30% Head.
         APreHandgonne=0,  # Gunner: 35-75, 25% Ignore, 90% Armor, Fearsome.
-        APre2HScimitar=0,  # Officer: 65-85, 25% Ignore, 110% Armor, Crippling, Executioner.
+        APre2HScimitar=0,  # Officer: 65-85, 25% Ignore, 110% Armor, Crippling, Executioner, Cleaver Mastery.
         APreQatal=0,  # Assassin: 30-45, 20% Ignore, 70% Armor, Duelist, Double Grip, Executioner.
         APreFDirewolf=0,  # Frenzied Direwolf: 30-50, 20% Ignore, 70% Armor, Executioner, Frenzied Direwolf.
         APreNachTier3=0,  # Tier 3 Nachzehrer: 55-80, 10% Ignore, 75% Armor.
@@ -658,6 +658,7 @@ def BBHitChance(
     NumberFearsomeProcs = []  # This list will hold number of Fearsome procs for each iteration (only displays if Fearsome is checked).
     Forge_bonus_armor = []  # This list will hold the amount of extra armor provided by Forge for each iteration (only displays if Forge is checked).
     hits_until_1st_poison = []  # This list will hold how many hits until first poisoning against Ambushers (only displays if Ambusher is checked)
+    hits_until_1st_bleed = []  # This list will hold how many hits until first bleed against cleavers (only displays if CleaverBleed or CleaverMastery is checked).
 
     print("-----")  # Added for readability. If this annoys you then remove this line.
     print("HP = " + str(Def_HP) + ", Helmet = " + str(Def_Helmet) + ", Armor = " + str(Def_Armor))
@@ -693,6 +694,7 @@ def BBHitChance(
         Bleedstack2T = 0
         ForgeSaved = 0  # Tracker to add the amount of armor gained from Forge for each iteration.
         Poison = 0  # Tracker for when first poisoning occurs against Ambushers.
+        Bleed = 0  # Tracker for when first bleeding occurs against cleavers.
 
         count = 0  # Number of hits until death. Starts at 0 and goes up after each attack.
         Hits = 0  # Unique to this calculator. Used for Glorious Endurance. Starts at 0 and goes up after each hit.
@@ -1268,6 +1270,10 @@ def BBHitChance(
                 # If damage taken >= 6 and Decapitate isn't in play, then apply a 2 turn bleed stack.
                 if math.floor(hp_roll) >= 6 and DecapMod == 1 and Decapitate != 1:
                     Bleedstack2T += 1
+                    # Track fist instance of bleed for later data return.
+                    if Bleed == 0:
+                        Bleed = 1
+                        hits_until_1st_bleed.append(count)
                 # Every two attacks (1 turn for Cleavers), apply bleed damage based on current bleed stacks.
                 # If Resilient, 2 turn bleed stacks apply damage and then are removed. Otherwise 2 turn bleed stacks apply damage and convert into 1 turn bleed stacks.
                 if count % 2 == 0:
@@ -1343,6 +1349,9 @@ def BBHitChance(
     if Ambusher == 1:
         if len(hits_until_1st_poison) != 0:
             hits_to_posion = statistics.mean(hits_until_1st_poison)
+    if (CleaverBleed == 1 or CleaverMastery == 1):
+        if len(hits_until_1st_bleed) != 0:
+            hits_to_bleed = statistics.mean(hits_until_1st_bleed)
 
     # Results:
     if DeathMean == 1:
@@ -1377,8 +1386,10 @@ def BBHitChance(
             print(str(AvgFearsomeProcs) + " Fearsome procs on average.")
     if Forge == 1:
         print(str(AvgForgeArmor) + " bonus armor from Forge on average.")
-    if Ambusher == 1:
-        print("First poison in " + str(hits_to_posion) + " hits on average.")
+    if (Ambusher == 1 and len(hits_until_1st_poison) != 0):
+        print("First poison in " + str(hits_to_posion) + " swings on average.")
+    if (CleaverBleed == 1 or CleaverMastery == 1 and len(hits_until_1st_bleed) != 0):
+        print("First bleed in " + str(hits_to_bleed) + " swings on average.")
     print("-----")  # Added for readability. If this annoys you then remove this line.
 
     # CREDITS:
@@ -1461,3 +1472,5 @@ def BBHitChance(
     # -- Adjusted Orc Berserker preset for new buff to Berserk Chain to 50-100, up from 40-100.
     # Version 1.6.3 (4/11/2022)
     # -- Fixed a bug with Forge + Split Man interaction where having low armor with Forge was giving much better survivability than it should have been against Split man.
+    # Version 1.6.4 (6/27/2023)
+    # -- Added a tracker that returns the average hits until first bleed proc for cleaver tests.
