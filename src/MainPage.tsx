@@ -83,6 +83,7 @@ export function MainPage() {
           setSelectedAttackerPreset(preset);
           setShowAttackerPresetSelection(false);
         }}
+        onClose={() => setShowAttackerPresetSelection(false)}
       />
     );
   }
@@ -96,6 +97,7 @@ export function MainPage() {
           setSelectedDefenderPreset(preset);
           setShowDefenderPresetSelection(false);
         }}
+        onClose={() => setShowDefenderPresetSelection(false)}
       />
     );
   }

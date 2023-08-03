@@ -6,12 +6,14 @@ type Props = {
   selectedPreset: string | null;
   setSelectedPreset: (preset: string | null) => void;
   presets: Preset[];
+  onClose: () => void;
 };
 
 export function PresetSelectionPage({
   selectedPreset,
   setSelectedPreset,
   presets,
+  onClose,
 }: Props) {
   return (
     <Page>
@@ -61,6 +63,7 @@ export function PresetSelectionPage({
           );
         })}
       </SimpleGrid>
+      <Button onClick={onClose}>Close</Button>
     </Page>
   );
 }
