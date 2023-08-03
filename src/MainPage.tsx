@@ -8,13 +8,13 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
-import { attackers } from "./presets/attackers.ts";
-import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
-import { PresetButton } from "./presets/PresetButton.tsx";
-import { defenders } from "./presets/defender.ts";
+import { attackers } from "./Presets/attackers.ts";
+import { PresetSelectionPage } from "./Presets/PresetSelectionPage.tsx";
+import { PresetButton } from "./Presets/PresetButton.tsx";
+import { defenders } from "./Presets/defender.ts";
 import { Page } from "./Layout/Page.tsx";
-import { OutputSelectionSection } from "./settings/OutputSelectionSection.tsx";
-import { outputOptions } from "./settings/output.ts";
+import { OutputSelectionSection } from "./Settings/OutputSelectionSection.tsx";
+import { outputOptions } from "./Settings/output.ts";
 import { IconMoonStars, IconSettings, IconSun } from "@tabler/icons-react";
 
 const scripts = [
