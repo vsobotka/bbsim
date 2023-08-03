@@ -1,12 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  ActionIcon,
-  Button,
-  NativeSelect,
-  Text,
-  TextInput,
-  useMantineColorScheme,
-} from "@mantine/core";
+import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
 import { attackers } from "./Presets/attackers.ts";
 import { PresetSelectionPage } from "./Presets/PresetSelectionPage.tsx";
@@ -15,7 +8,8 @@ import { defenders } from "./Presets/defender.ts";
 import { Page } from "./Layout/Page.tsx";
 import { OutputSelectionSection } from "./Settings/OutputSelectionSection.tsx";
 import { outputOptions } from "./Settings/output.ts";
-import { IconMoonStars, IconSettings, IconSun } from "@tabler/icons-react";
+import { ThemeToggleButton } from "./Settings/ThemeToggleButton.tsx";
+import { OutputSettingsButton } from "./Settings/OutputSettingsButton.tsx";
 
 const scripts = [
   "BB1HanderBattery",
@@ -45,8 +39,6 @@ export function MainPage() {
   const [showDefenderPresetSelection, setShowDefenderPresetSelection] =
     useState(false);
   const [showOutputSelection, setShowOutputSelection] = useState(false);
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const dark = colorScheme === "dark";
 
   useEffect(() => {
     getScriptDefaults(script).then((defaults) => {
@@ -136,26 +128,14 @@ export function MainPage() {
       >
         Run
       </Button>
-      <ActionIcon
-        style={{ display: "inline-block", float: "right" }}
-        onClick={() => toggleColorScheme()}
-        title="Toggle color scheme"
-      >
-        {dark ? <IconSun size="1.1rem" /> : <IconMoonStars size="1.1rem" />}
-      </ActionIcon>
-      <ActionIcon
-        style={{ display: "inline-block", float: "right" }}
-        onClick={() => setShowOutputSelection(true)}
-        title="Output options"
-      >
-        <IconSettings />
-      </ActionIcon>
+      <ThemeToggleButton />
+      <OutputSettingsButton onClick={() => setShowOutputSelection(true)} />
       {running && (
         <Text style={{ display: "inline-block" }}>Running {script}...</Text>
       )}
       {output.length > 0 && (
-        <Text style={{ display: "inline-block" }}>
-          Scroll down to see the output
+        <Text style={{ display: "inline-block", marginLeft: 10 }}>
+          ↓ Scroll down to see the output ↓
         </Text>
       )}
       {!args && <Text>Loading...</Text>}
