@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
-import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
+import {
+  ActionIcon,
+  Button,
+  NativeSelect,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
 import { attackers } from "./presets/attackers.ts";
 import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
 import { PresetButton } from "./presets/PresetButton.tsx";
 import { defenders } from "./presets/defender.ts";
 import { Page } from "./Layout/Page.tsx";
+import { OutputSelectionSection } from "./settings/OutputSelectionSection.tsx";
+import { outputOptions } from "./settings/output.ts";
+import { IconSettings } from "@tabler/icons-react";
 
 const scripts = [
   "BB1HanderBattery",
@@ -34,6 +43,7 @@ export function App() {
     useState(false);
   const [showDefenderPresetSelection, setShowDefenderPresetSelection] =
     useState(false);
+  const [showOutputSelection, setShowOutputSelection] = useState(false);
 
   useEffect(() => {
     getScriptDefaults(script).then((defaults) => {
@@ -95,6 +105,16 @@ export function App() {
     );
   }
 
+  if (showOutputSelection) {
+    return (
+      <OutputSelectionSection
+        args={args}
+        setArgs={setArgs}
+        onClose={() => setShowOutputSelection(false)}
+      />
+    );
+  }
+
   return (
     <Page>
       <NativeSelect
@@ -121,9 +141,14 @@ export function App() {
           Scroll down to see the output
         </Text>
       )}
-      <br />
-
       {!args && <Text>Loading...</Text>}
+      <ActionIcon
+        style={{ display: "inline-block", float: "right" }}
+        onClick={() => setShowOutputSelection(true)}
+      >
+        <IconSettings />
+      </ActionIcon>
+      <br />
       <PresetButton
         label={"Attacker preset: "}
         selectedPreset={selectedAttackerPreset}
@@ -145,6 +170,7 @@ export function App() {
         Object.entries(args)
           .filter(([key]) => !attackers.some((att) => att.id === key))
           .filter(([key]) => !defenders.some((att) => att.id === key))
+          .filter(([key]) => !outputOptions.some((att) => att.id === key))
           .map(([key, value]) => (
             <TextInput
               style={{ width: 120, display: "inline-block" }}

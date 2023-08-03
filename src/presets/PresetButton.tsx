@@ -1,5 +1,6 @@
 import { Button } from "@mantine/core";
 import { Preset } from "./attackers.ts";
+import { containsSomeArg } from "../Utils.ts";
 
 type Props = {
   label: string;
@@ -22,11 +23,7 @@ export function PresetButton({
     return null;
   }
 
-  if (
-    !Object.entries(args).some(([key]) =>
-      presets.some((preset) => preset.id === key)
-    )
-  ) {
+  if (!containsSomeArg(presets, args)) {
     return null;
   }
 
