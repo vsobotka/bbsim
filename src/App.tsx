@@ -5,6 +5,7 @@ import { attackers } from "./presets/attackers.ts";
 import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
 import { PresetButton } from "./presets/PresetButton.tsx";
 import { defenders } from "./presets/defender.ts";
+import { Page } from "./Page.tsx";
 
 const scripts = [
   "BB1HanderBattery",
@@ -88,7 +89,7 @@ export function App() {
   }
 
   return (
-    <>
+    <Page>
       <NativeSelect
         data={scripts}
         value={script}
@@ -151,6 +152,6 @@ export function App() {
       <Text span style={{ whiteSpace: "pre" }}>
         {running ? "Running script..." : output.join("\n")}
       </Text>
-    </>
+    </Page>
   );
 }
