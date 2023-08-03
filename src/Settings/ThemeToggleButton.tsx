@@ -7,7 +7,7 @@ export function ThemeToggleButton() {
 
   return (
     <ActionIcon
-      style={{ display: "inline-block", float: "right" }}
+      style={{ display: "inline-block", float: "right", marginLeft: 10 }}
       onClick={() => toggleColorScheme()}
       title="Toggle color scheme"
     >

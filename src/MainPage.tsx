@@ -128,8 +128,8 @@ export function MainPage() {
       >
         Run
       </Button>
-      <ThemeToggleButton />
       <OutputSettingsButton onClick={() => setShowOutputSelection(true)} />
+      <ThemeToggleButton />
       {running && (
         <Text style={{ display: "inline-block" }}>Running {script}...</Text>
       )}
