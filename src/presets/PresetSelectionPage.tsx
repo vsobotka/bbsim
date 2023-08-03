@@ -14,41 +14,47 @@ export function PresetSelectionPage({
 }: Props) {
   return (
     <SimpleGrid
-      cols={3}
-      spacing="xs"
+      spacing="sm"
       verticalSpacing="sm"
       breakpoints={[
         { maxWidth: "xs", cols: 1 },
         { maxWidth: "sm", cols: 2 },
+        { maxWidth: "md", cols: 3 },
+        { maxWidth: "lg", cols: 4 },
+        { maxWidth: "xl", cols: 5 },
       ]}
     >
       {Object.keys(Factions).map((faction) => {
+        const presetsToShow = presets.filter(
+          (preset) =>
+            preset.faction === Factions[faction as keyof typeof Factions]
+        );
+
+        if (presetsToShow.length === 0) {
+          return null;
+        }
+
         return (
           <div key={faction} style={{ width: 250 }}>
             <Title order={5}>{faction}</Title>
-            {presets
-              .filter(
-                (preset) =>
-                  preset.faction === Factions[faction as keyof typeof Factions]
-              )
-              .map((preset) => {
-                const selected = selectedPreset === preset.id;
+            {presetsToShow.map((preset) => {
+              const selected = selectedPreset === preset.id;
 
-                return (
-                  <Button
-                    key={preset.id}
-                    style={{ display: "block" }}
-                    variant={selected ? "filled" : "subtle"}
-                    onClick={() => {
-                      selected
-                        ? setSelectedPreset(null)
-                        : setSelectedPreset(preset.id);
-                    }}
-                  >
-                    {preset.name}
-                  </Button>
-                );
-              })}
+              return (
+                <Button
+                  key={preset.id}
+                  style={{ display: "block" }}
+                  variant={selected ? "filled" : "subtle"}
+                  onClick={() => {
+                    selected
+                      ? setSelectedPreset(null)
+                      : setSelectedPreset(preset.id);
+                  }}
+                >
+                  {preset.name}
+                </Button>
+              );
+            })}
           </div>
         );
       })}
