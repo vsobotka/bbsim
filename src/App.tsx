@@ -5,7 +5,7 @@ import { attackers } from "./presets/attackers.ts";
 import { PresetSelectionPage } from "./presets/PresetSelectionPage.tsx";
 import { PresetButton } from "./presets/PresetButton.tsx";
 import { defenders } from "./presets/defender.ts";
-import { Page } from "./Page.tsx";
+import { Page } from "./Layout/Page.tsx";
 
 const scripts = [
   "BB1HanderBattery",

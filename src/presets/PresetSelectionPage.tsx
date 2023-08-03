@@ -1,6 +1,6 @@
 import { Factions, Preset } from "./attackers.ts";
 import { Button, SimpleGrid, Title } from "@mantine/core";
-import { Page } from "../Page.tsx";
+import { Page } from "../Layout/Page.tsx";
 
 type Props = {
   selectedPreset: string | null;
