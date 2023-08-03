@@ -78,6 +78,7 @@ StDev: 0.22230893158632462
 % Hits to die: [(2, 3.81), (3, 94.99), (4, 1.2)]
 First injury in 1.3237 hits on average.
 Chance of first heavy injury in 3.020916221439127 hits on average.
+First bleed in 1 hits on average.
 -----
 Military Cleaver - Decap at 50%:
 HP = 100, Helmet = 120, Armor = 95
@@ -86,6 +87,7 @@ StDev: 0.19120101435765074
 % Hits to die: [(2, 3.8), (3, 96.2)]
 First injury in 1.3211 hits on average.
 Chance of first heavy injury in 3 hits on average.
+First bleed in 1 hits on average.
 -----
 Khopesh:
 HP = 100, Helmet = 120, Armor = 95
@@ -94,6 +96,7 @@ StDev: 0.3054286403281733
 % Hits to die: [(2, 2.98), (3, 90.55), (4, 6.47)]
 First injury in 1.5782 hits on average.
 Chance of first heavy injury in 3.0497041420118345 hits on average.
+First bleed in 1 hits on average.
 -----
 Khopesh - Decap at 50%:
 HP = 100, Helmet = 120, Armor = 95
@@ -102,6 +105,7 @@ StDev: 0.16224984977092438
 % Hits to die: [(2, 2.7), (3, 97.295), (4, 0.005)]
 First injury in 1.56375 hits on average.
 Chance of first heavy injury in 2.980291295803953 hits on average.
+First bleed in 1 hits on average.
 -----
 Head Chopper:
 HP = 100, Helmet = 120, Armor = 95
@@ -110,6 +114,7 @@ StDev: 0.5000031976496581
 % Hits to die: [(2, 50.305), (3, 49.695)]
 First injury in 1.10145 hits on average.
 Chance of first heavy injury in 2.5900875722004844 hits on average.
+First bleed in 1 hits on average.
 -----
 Head Chopper - Decap at 50%:
 HP = 100, Helmet = 120, Armor = 95
@@ -118,6 +123,7 @@ StDev: 0.4999884892919748
 % Hits to die: [(2, 50.49), (3, 49.51)]
 First injury in 1.10275 hits on average.
 Chance of first heavy injury in 2.5906253900886282 hits on average.
+First bleed in 1 hits on average.
 -----
 Noble Sword:
 HP = 100, Helmet = 120, Armor = 95
@@ -249,6 +255,7 @@ StDev: 0.5019052753710328
 % Hits to die: [(2, 29.84), (3, 67.45), (4, 2.71)]
 First injury in 2.38625 hits on average.
 Chance of first heavy injury in 2.4351820538834406 hits on average.
+First bleed in 1 hits on average.
 -----
 2H Scimitar - Decap at 50%:
 HP = 100, Helmet = 120, Armor = 95
@@ -257,6 +264,7 @@ StDev: 0.45924018234171743
 % Hits to die: [(2, 29.805), (3, 70.09), (4, 0.105)]
 First injury in 2.3807 hits on average.
 Chance of first heavy injury in 2.4481458202388433 hits on average.
+First bleed in 1 hits on average.
 -----
 Rusty Warblade:
 HP = 100, Helmet = 120, Armor = 95
@@ -265,6 +273,7 @@ StDev: 0.39357456097511223
 % Hits to die: [(2, 17.75), (3, 81.58999999999999), (4, 0.66)]
 First injury in 1.9721540541894125 hits on average.
 Chance of first heavy injury in 2.528946990374946 hits on average.
+First bleed in 1 hits on average.
 -----
 Rusty Warblade - Decap at 50%:
 HP = 100, Helmet = 120, Armor = 95
@@ -273,6 +282,7 @@ StDev: 0.3831943395916682
 % Hits to die: [(2, 17.88), (3, 82.12)]
 First injury in 1.98135 hits on average.
 Chance of first heavy injury in 2.638285155401 hits on average.
+First bleed in 1 hits on average.
 -----
 Greatsword - Overhead
 HP = 100, Helmet = 120, Armor = 95
@@ -638,11 +648,11 @@ No chance of heavy injury.
 
 BBCalc_original_stdout = """-----
 HP = 100, Helmet = 120, Armor = 95
-Death in 3.33949 hits on average.
-StDev: 0.5017958328748644
-% Hits to die: [(2, 1.2309999999999999), (3, 63.736000000000004), (4, 34.886), (5, 0.147)]
-First injury in 2.47364 hits on average.
-Chance of first heavy injury in 2.8984 hits on average.
+Death in 3.33951 hits on average.
+StDev: 0.5018022299220875
+% Hits to die: [(2, 1.2309999999999999), (3, 63.734), (4, 34.888000000000005), (5, 0.147)]
+First injury in 2.47371 hits on average.
+Chance of first heavy injury in 2.89838 hits on average.
 -----
 """
 
@@ -682,6 +692,7 @@ StDev: 0.5150985562513889
 First injury in 2.393 hits on average.
 Chance of first heavy injury in 2.533524027459954 hits on average.
 0.2239 Fearsome procs on average.
+First bleed in 1 hits on average.
 -----
 Necrosavant - Khopesh:
 HP = 100, Helmet = 120, Armor = 95
@@ -690,6 +701,7 @@ StDev: 0.6457613264737033
 % Hits to die: [(3, 30.8), (4, 55.410000000000004), (5, 13.79)]
 First injury in 2.7394 hits on average.
 Chance of first heavy injury in 3.420128148475475 hits on average.
+First bleed in 1 hits on average.
 -----
 Fallen Hero - Greataxe:
 HP = 100, Helmet = 120, Armor = 95
@@ -723,6 +735,7 @@ StDev: 0.5324064759801167
 % Hits to die: [(2, 1.79), (3, 51.29), (4, 46.92)]
 First injury in 2.6911292826829523 hits on average.
 Chance of first heavy injury in 3.1832759077657036 hits on average.
+First bleed in 1 hits on average.
 -----
 Orc Warlord - Mansplitter:
 HP = 100, Helmet = 120, Armor = 95
@@ -781,6 +794,7 @@ StDev: 0.4994486408976297
 % Hits to die: [(2, 47.599999999999994), (3, 52.400000000000006)]
 First injury in 1 hits on average.
 Chance of first heavy injury in 2.3115729996973062 hits on average.
+First bleed in 1 hits on average.
 -----
 Billman - Billhook:
 HP = 100, Helmet = 120, Armor = 95
@@ -886,6 +900,7 @@ StDev: 0.5116345639152023
 % Hits to die: [(2, 43.6), (3, 55.55), (4, 0.8500000000000001)]
 First injury in 1.4295 hits on average.
 Chance of first heavy injury in 2.390973681577104 hits on average.
+First bleed in 1 hits on average.
 -----
 Assassin - Qatal:
 HP = 100, Helmet = 120, Armor = 95
