@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, NativeSelect, Text, TextInput } from "@mantine/core";
+import { Button, Text, TextInput } from "@mantine/core";
 import { getScriptDefaults, runScript } from "./runners/runners.ts";
 import { attackers } from "./Presets/attackers.ts";
 import { PresetSelectionPage } from "./Presets/PresetSelectionPage.tsx";
@@ -10,17 +10,8 @@ import { OutputSelectionSection } from "./Settings/OutputSelectionSection.tsx";
 import { outputOptions } from "./Settings/output.ts";
 import { ThemeToggleButton } from "./Settings/ThemeToggleButton.tsx";
 import { OutputSettingsButton } from "./Settings/OutputSettingsButton.tsx";
-
-const scripts = [
-  "BB1HanderBattery",
-  "BB2HanderBattery",
-  "BBAttackerVsEnemies",
-  "BBCalc",
-  "BBEnemiesVsDefender",
-  "BBHitChance",
-  "BBNimbleBattery",
-  "BBRaisingHp",
-];
+import { scripts } from "./Settings/scripts.ts";
+import { ScenarioSelectionPage } from "./Settings/ScenarioSelectionPage.tsx";
 
 export function MainPage() {
   const [output, setOutput] = useState<string[]>([]);
@@ -39,11 +30,14 @@ export function MainPage() {
   const [showDefenderPresetSelection, setShowDefenderPresetSelection] =
     useState(false);
   const [showOutputSelection, setShowOutputSelection] = useState(false);
+  const [showScriptSelection, setShowScriptSelection] = useState(false);
 
   useEffect(() => {
-    getScriptDefaults(script).then((defaults) => {
+    getScriptDefaults(script.id).then((defaults) => {
       setArgs(Object.fromEntries(defaults));
     });
+    setOutput([]);
+    setArgs(null);
   }, [script]);
 
   const runScriptHandler = args
@@ -61,7 +55,7 @@ export function MainPage() {
         }
 
         runScript(
-          script,
+          script.id,
           (addition) => {
             setOutput((output) => [...output, addition]);
           },
@@ -112,18 +106,27 @@ export function MainPage() {
     );
   }
 
-  return (
-    <Page>
-      <NativeSelect
-        data={scripts}
-        value={script}
-        onChange={(e) => {
+  if (showScriptSelection) {
+    return (
+      <ScenarioSelectionPage
+        selectedScript={script}
+        onClick={(script) => {
           setOutput([]);
           setArgs(null);
-          setScript(e.currentTarget.value);
+          setScript(script);
+          setShowScriptSelection(false);
         }}
-        style={{ width: 250, display: "inline-block", marginRight: 15 }}
+        onClose={() => setShowScriptSelection(false)}
       />
+    );
+  }
+
+  return (
+    <Page>
+      {"Scenario: "}
+      <Button onClick={() => setShowScriptSelection(true)} variant={"subtle"}>
+        {script.id}
+      </Button>
       <Button
         disabled={running || !runScriptHandler}
         onClick={runScriptHandler}
@@ -133,7 +136,7 @@ export function MainPage() {
       <OutputSettingsButton onClick={() => setShowOutputSelection(true)} />
       <ThemeToggleButton />
       {running && (
-        <Text style={{ display: "inline-block" }}>Running {script}...</Text>
+        <Text style={{ display: "inline-block" }}>Running {script.id}...</Text>
       )}
       {output.length > 0 && (
         <Text style={{ display: "inline-block", marginLeft: 10 }}>
